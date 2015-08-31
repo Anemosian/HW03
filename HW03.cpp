@@ -17,7 +17,7 @@ void vprint(vector<string> & v)
 //determines what value would be in the step if ever 
 int steprand(int& boardsize)
 {
-	int spaces = boardsize/2;
+	int spaces = boardsize / 2;
 	random_device ran;
 	mt19937 dev(ran());
 	uniform_int_distribution<> dis(-spaces, spaces);
@@ -30,7 +30,7 @@ bool tilerand()
 {
 	random_device randev;
 	mt19937 gen(randev());
-	uniform_real_distribution<> dis(0,1);
+	uniform_real_distribution<> dis(0, 1);
 
 	if (dis(gen) > 0.7)
 	{
@@ -53,6 +53,11 @@ int main()
 	int n;
 	int onep;
 	int twop;
+
+	//token motion
+	int moves;
+	bool player = true;
+	int randomValue = 0;
 
 	//boardsize input
 	cout << "Please enter the number of cells...";
@@ -81,7 +86,7 @@ int main()
 		botvec.insert(botvec.end(), tobot.begin(), tobot.end());
 	}
 
-	//inserts token to start
+	//inserts token to start and makes first move
 	midvec[tplace] = "@";
 
 	//prints the board
@@ -95,7 +100,7 @@ int main()
 	//calls the rand functions
 	for (int i = 0; i < 20; i++)
 	{
-	
+
 		if (tilerand() == true)
 		{
 			cout << "Tilerands: " << tilerand() << " " << endl;
@@ -105,28 +110,46 @@ int main()
 		{
 			cout << "Steprands: 0" << endl << endl;
 		}
-		
+
 	}
 
-	/*
+
 	while (winner != 1)
 	{
-		cout << "Enter first move: ";
-		cin >> onep;
-
-		n = tplace + onep * 2;
-		tplace = n;
-		midvec[tplace] = "@";
-
-		//prints the board
-		vprint(topvec);
-		cout << endl;
-		vprint(midvec);
-		cout << endl;
-		vprint(botvec);
-		cout << endl;
+	//input movement
+	if(player == true){
+	cout << "Please enter number of tiles to move, Player 1.";
+	cin >> moves;
+	player = false;
+	}else{
+	cout << "Please enter number of tiles to move, Player 2.";
+	cin >> moves;
+	player = true;
 	}
-	*/
+
+	if (tilerand() == true) {
+	randomValue = steprand(boardsize);
+	}
+	else {
+	randomValue = 0;
+	}
+	midvec[tplace] = " ";
+	tplace += (2 * moves) + randomValue;
+	randomValue = 0;
+	midvec[tplace] = "@";
+
+	midvec[tplace] = " ";
+	tplace += (2 * moves);
+	midvec[tplace] = "@";
+
+	//prints the board
+	vprint(topvec);
+	cout << endl;
+	vprint(midvec);
+	cout << endl;
+	vprint(botvec);
+	cout << endl;
+	}
 
 	//pause buffer
 	cin >> pbuffer;
