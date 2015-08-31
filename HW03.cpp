@@ -50,13 +50,12 @@ int main()
 	int winner = 0; //endcheck
 	int tokenhold;
 	int tplace = 1;
-	int n;
-	int onep;
-	int twop;
+	int wintile;
 
 	//token motion
 	int moves;
 	bool player = true;
+	int p2, p1; //win check?
 	int randomValue = 0;
 
 	//boardsize input
@@ -97,50 +96,36 @@ int main()
 	vprint(botvec);
 	cout << endl;
 
-	//calls the rand functions
-	for (int i = 0; i < 20; i++)
-	{
-
-		if (tilerand() == true)
-		{
-			cout << "Tilerands: " << tilerand() << " " << endl;
-			cout << "Steprands: " << steprand(boardsize) << " " << endl << endl;
-		}
-		else
-		{
-			cout << "Steprands: 0" << endl << endl;
-		}
-
-	}
-
+	//initiliaze winning tile
+	wintile = (boardsize * 2) - 1;
 
 	while (winner != 1)
 	{
 	//input movement
 	if(player == true){
-	cout << "Please enter number of tiles to move, Player 1.";
-	cin >> moves;
-	player = false;
+		cout << "Please enter number of tiles to move, Player 1: ";
+		cin >> moves;
+		player = false;
+		p1 = 1;
+		p2 = 0;
 	}else{
-	cout << "Please enter number of tiles to move, Player 2.";
-	cin >> moves;
-	player = true;
+		cout << "Please enter number of tiles to move, Player 2: ";
+		cin >> moves;
+		player = true;
+		p2 = 1;
+		p1 = 0;
 	}
 
-	if (tilerand() == true) {
-	randomValue = steprand(boardsize);
-	}
-	else {
-	randomValue = 0;
-	}
 	midvec[tplace] = " ";
 	tplace += (2 * moves) + randomValue;
 	randomValue = 0;
 	midvec[tplace] = "@";
 
+	/*
 	midvec[tplace] = " ";
 	tplace += (2 * moves);
 	midvec[tplace] = "@";
+	*/
 
 	//prints the board
 	vprint(topvec);
@@ -149,6 +134,25 @@ int main()
 	cout << endl;
 	vprint(botvec);
 	cout << endl;
+
+		if (midvec.at(wintile) == "@")
+		{
+			winner = 1;
+		}
+		else
+		{
+			winner = 0;
+		}
+
+	}
+
+	if (player == true)
+	{
+		cout << "Player 1 wins.";
+	}
+	else if (p1 = 1)
+	{
+		cout << "Player 2 wins.";
 	}
 
 	//pause buffer
@@ -156,3 +160,34 @@ int main()
 
 	return EXIT_SUCCESS;
 }
+
+//------------------TESTCODES------------------------------
+
+//calls the rand functions for testing
+/*
+for (int i = 0; i < 20; i++)
+{
+
+if (tilerand() == true)
+{
+cout << "Tilerands: " << tilerand() << " " << endl;
+cout << "Steprands: " << steprand(boardsize) << " " << endl << endl;
+}
+else
+{
+cout << "Steprands: 0" << endl << endl;
+}
+
+}
+*/
+
+
+//rand value inside tiles
+/*
+if (tilerand() == true) {
+randomValue = steprand(boardsize);
+}
+else {
+randomValue = 0;
+}
+*/
