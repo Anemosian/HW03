@@ -146,11 +146,11 @@ int main()
 
 	}
 
-	if (player == true)
+	if (player == false)
 	{
 		cout << "Player 1 wins.";
 	}
-	else if (p1 = 1)
+	else
 	{
 		cout << "Player 2 wins.";
 	}
