@@ -51,15 +51,15 @@ int main()
 	int tokenhold;
 	int tplace = 1;
 	int wintile;
+	int endtile;
 
 	//token motion
 	int moves;
 	bool player = true;
-	int p2, p1; //win check?
 	int randomValue = 0;
 
 	//boardsize input
-	cout << "Please enter the number of cells...";
+	cout << "Please enter the number of cells... ";
 	cin >> boardsize;
 
 	//total board
@@ -85,7 +85,7 @@ int main()
 		botvec.insert(botvec.end(), tobot.begin(), tobot.end());
 	}
 
-	//inserts token to start and makes first move
+	//inserts token to start
 	midvec[tplace] = "@";
 
 	//prints the board
@@ -106,20 +106,30 @@ int main()
 		cout << "Please enter number of tiles to move, Player 1: ";
 		cin >> moves;
 		player = false;
-		p1 = 1;
-		p2 = 0;
 	}else{
 		cout << "Please enter number of tiles to move, Player 2: ";
 		cin >> moves;
 		player = true;
-		p2 = 1;
-		p1 = 0;
 	}
 
-	midvec[tplace] = " ";
-	tplace += (2 * moves) + randomValue;
-	randomValue = 0;
-	midvec[tplace] = "@";
+
+		while (moves != 0)
+		{
+			midvec[tplace] = " ";
+			tplace += 2;
+
+			//bounceback condition
+			/*
+			if ()
+			{
+
+			}
+			*/
+			//end of bounceback 
+
+			midvec[tplace] = "@";
+			moves--;
+		}
 
 	/*
 	midvec[tplace] = " ";
