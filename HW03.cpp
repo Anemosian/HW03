@@ -48,15 +48,15 @@ int main()
 	int boardsize;
 	int pbuffer; //pausebuffer
 	int winner = 0; //endcheck
-	int tokenhold;
+					//int tokenhold;
 	int tplace = 1;
 	int wintile;
-	int endtile;
+	//	int endtile;
 
 	//token motion
 	int moves;
 	bool player = true;
-	int randomValue = 0;
+	//	int randomValue = 0;
 
 	//boardsize input
 	cout << "Please enter the number of cells... ";
@@ -101,49 +101,55 @@ int main()
 
 	while (winner != 1)
 	{
-	//input movement
-	if(player == true){
-		cout << "Please enter number of tiles to move, Player 1: ";
-		cin >> moves;
-		player = false;
-	}else{
-		cout << "Please enter number of tiles to move, Player 2: ";
-		cin >> moves;
-		player = true;
-	}
-
-
-		while (moves != 0)
-		{
-			midvec[tplace] = " ";
-			tplace += 2;
-
-			//bounceback condition
-			/*
-			if ()
-			{
-
-			}
-			*/
-			//end of bounceback 
-
-			midvec[tplace] = "@";
-			moves--;
+		//input movement
+		if (player == true) {
+			cout << "Please enter number of tiles to move, Player 1: ";
+			cin >> moves;
+			player = false;
+		}
+		else {
+			cout << "Please enter number of tiles to move, Player 2: ";
+			cin >> moves;
+			player = true;
 		}
 
-	/*
-	midvec[tplace] = " ";
-	tplace += (2 * moves);
-	midvec[tplace] = "@";
-	*/
 
-	//prints the board
-	vprint(topvec);
-	cout << endl;
-	vprint(midvec);
-	cout << endl;
-	vprint(botvec);
-	cout << endl;
+		/*while (moves != 0)
+		{
+		midvec[tplace] = " ";
+		tplace += 2;
+
+		//bounceback condition
+
+		if ()
+		{
+
+		}
+
+		//end of bounceback
+
+		midvec[tplace] = "@";
+		moves--;
+		}
+		*/
+		if ((tplace + (2 * moves)) > (midvec.size() - 2)) {
+			midvec[tplace] = " ";
+			tplace = tplace + ((2 * moves) - ((midvec.size() - 2) - tplace +2 ));
+			midvec[tplace] = "@";
+		}
+		else {
+			midvec[tplace] = " ";
+			tplace += (2 * moves);
+			midvec[tplace] = "@";
+		}
+
+		//prints the board
+		vprint(topvec);
+		cout << endl;
+		vprint(midvec);
+		cout << endl;
+		vprint(botvec);
+		cout << endl;
 
 		if (midvec.at(wintile) == "@")
 		{
